@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: add-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: add
+  template:
+    metadata:
+      labels:
+        app: add
+    spec:
+      containers:
+      - name: addct
+        image: devopsinsiders/micro-addtask
+        ports:
+        - containerPort: 8000
+        env:
+        - name: CONNECTION_STRING
+          valueFrom:
+           secretKeyRef:
+             key: CONNECTION_STRING
+             name: todosecret

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: delete-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: delete
+  template:
+    metadata:
+      labels:
+        app: delete
+    spec:
+      containers:
+      - name: deletect
+        image: devopsinsiders/micro-deletetask
+        ports:
+        - containerPort: 8000
+        env:
+        - name: CONNECTION_STRING
+          valueFrom:
+           secretKeyRef:
+             key: CONNECTION_STRING
+             name: todosecret

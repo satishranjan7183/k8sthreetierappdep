@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+  labels:
+    app: frontend
+spec:
+  ingressClassName: azure-application-gateway
+  rules:
+  - host: todo.satishranjan.online
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: frontend-svc
+            port: 
+              number: 80

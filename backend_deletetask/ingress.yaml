@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: delete-ingress
+  labels:
+    app: delete
+spec:
+  ingressClassName: azure-application-gateway
+  rules:
+  - host: delete.satishranjan.online
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: delete-svc
+            port: 
+              number: 80

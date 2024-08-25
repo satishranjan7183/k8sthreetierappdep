@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontendct
+        image: satishranjan7183/frontend
+        ports:
+        - containerPort: 8000
+        env:
+        - name: CONNECTION_STRING
+          valueFrom:
+           secretKeyRef:
+             key: CONNECTION_STRING
+             name: todosecret
